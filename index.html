@@ -1,0 +1,19 @@
+<p><b>Hourly timer notifications</b></p>
+<button id="start" onclick="start()">Start</button>
+<script>
+    function start() {
+        Notification.requestPermission().then((result) => {
+            setupNotifications();
+        })
+    }
+    function setupNotifications() {
+        setInterval(() => {
+            // Check if it's right on the hour
+            if (new Date().getMinutes() == 0) {
+                // and send a notification
+                new Notification('Hourly timer!', {requireInteraction: true});
+
+            }
+        }, 60000)
+    }
+</script>
