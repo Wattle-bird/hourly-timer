@@ -1,9 +1,15 @@
 <p><b>Hourly timer notifications</b></p>
 <button id="start" onclick="start()">Start</button>
 <script>
+    let started = false;
     function start() {
+        if (started) return;
         Notification.requestPermission().then((result) => {
-            setupNotifications();
+            if (result === "granted") {
+                document.getElementById('start').disabled = true;
+                document.getElementById('start').innerHTML = "Started"
+                setupNotifications();
+            }
         })
     }
     function setupNotifications() {
@@ -16,4 +22,5 @@
             }
         }, 60000)
     }
+    start();
 </script>
